@@ -4,7 +4,7 @@ using PrismTabs.Services.Interfaces;
 
 namespace PrismTabs.Modules.ModuleName.ViewModels
 {
-    public class ViewAViewModel : RegionViewModelBase
+    public class ViewBViewModel : RegionViewModelBase
     {
         private string _message;
         public string Message
@@ -13,12 +13,12 @@ namespace PrismTabs.Modules.ModuleName.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
-        public ViewAViewModel(IRegionManager regionManager, IMessageService messageService) :
+        public ViewBViewModel(IRegionManager regionManager, IMessageService messageService) :
             base(regionManager)
         {
             Message = messageService.GetMessage();
 
-            Title = "ViewA";
+            Title = "ViewB";
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
@@ -28,7 +28,7 @@ namespace PrismTabs.Modules.ModuleName.ViewModels
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            return false;
+            return true;
         }
     }
 }
