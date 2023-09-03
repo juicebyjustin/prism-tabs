@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PrismTabs.Core.Prism;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,16 @@ namespace PrismTabs.Modules.ModuleName.Views
     /// <summary>
     /// Interaction logic for ViewA.xaml
     /// </summary>
-    public partial class ViewA : UserControl
+    public partial class ViewA : UserControl, ICreateRegionManagerScope
     {
         public ViewA()
         {
             InitializeComponent();
+        }
+
+        public bool CreateRegionManagerScope
+        {
+            get { return true; }
         }
     }
 }
