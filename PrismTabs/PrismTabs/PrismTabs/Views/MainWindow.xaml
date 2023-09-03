@@ -54,6 +54,9 @@
             <Button Command="{Binding NavigateCommand}"
                     CommandParameter="ViewB"
                     Margin="5">Navigate B</Button>
+            <Button Command="{Binding NavigateCommand}"
+                    CommandParameter="ViewC"
+                    Margin="5">Navigate C</Button>
         </StackPanel>
         
         <TabControl Grid.Row="1"
