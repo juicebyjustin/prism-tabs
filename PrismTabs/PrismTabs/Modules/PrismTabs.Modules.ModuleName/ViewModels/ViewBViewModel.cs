@@ -28,7 +28,7 @@ namespace PrismTabs.Modules.ModuleName.ViewModels
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            return true;
+            return false;
         }
     }
 }

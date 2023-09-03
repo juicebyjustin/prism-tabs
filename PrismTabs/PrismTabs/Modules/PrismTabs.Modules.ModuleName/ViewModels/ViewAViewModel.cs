@@ -1,10 +1,11 @@
-﻿using Prism.Regions;
+﻿using Prism.Commands;
+using Prism.Regions;
 using PrismTabs.Core.Mvvm;
 using PrismTabs.Services.Interfaces;
 
 namespace PrismTabs.Modules.ModuleName.ViewModels
 {
-    public class ViewAViewModel : RegionViewModelBase
+    public class ViewAViewModel : ViewModelBase
     {
         private string _message;
         public string Message
@@ -13,17 +14,23 @@ namespace PrismTabs.Modules.ModuleName.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
-        public ViewAViewModel(IRegionManager regionManager, IMessageService messageService) :
-            base(regionManager)
+        public DelegateCommand<string> NavigateCommand { get; set; }
+
+        private readonly IRegionManager _regionManager;
+
+        public ViewAViewModel(IRegionManager regionManager, IMessageService messageService)
         {
             Message = messageService.GetMessage();
 
-            Title = "ViewA";
+            _regionManager = regionManager;
+
+            Title = "View A";
+            NavigateCommand = new DelegateCommand<string>(Navigate);
         }
 
-        public override void OnNavigatedTo(NavigationContext navigationContext)
+        void Navigate(string navigationPath)
         {
-            //do something
+            _regionManager.RequestNavigate("ChildRegion", navigationPath);
         }
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)
