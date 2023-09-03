@@ -1,13 +1,22 @@
 ﻿using Prism.Commands;
 using Prism.Regions;
 using PrismTabs.Core.Mvvm;
+using PrismTabs.Core.Prism;
 using PrismTabs.Services.Interfaces;
 
 namespace PrismTabs.Modules.ModuleName.ViewModels
 {
-    public class ViewAViewModel : ViewModelBase
+    public class ViewAViewModel : ViewModelBase, IRegionManagerAware
     {
+        public IRegionManager RegionManager
+        {
+            get => regionManager;
+            set => regionManager = value;
+        }
+
         private string _message;
+        private IRegionManager regionManager;
+
         public string Message
         {
             get { return _message; }
@@ -30,7 +39,7 @@ namespace PrismTabs.Modules.ModuleName.ViewModels
 
         void Navigate(string navigationPath)
         {
-            _regionManager.RequestNavigate("ChildRegion", navigationPath);
+            RegionManager.RequestNavigate("ChildRegion", navigationPath);
         }
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)

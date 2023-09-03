@@ -1,6 +1,7 @@
 ﻿using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
+using PrismTabs.Core.Prism;
 using PrismTabs.Modules.ModuleName;
 using PrismTabs.Services;
 using PrismTabs.Services.Interfaces;
@@ -30,6 +31,13 @@ namespace PrismTabs
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<ModuleNameModule>();
+        }
+
+        protected override void ConfigureDefaultRegionBehaviors(IRegionBehaviorFactory regionBehaviors)
+        {
+            base.ConfigureDefaultRegionBehaviors(regionBehaviors);
+
+            regionBehaviors.AddIfMissing(RegionManagerAwareBehavior.BehaviorKey, typeof(RegionManagerAwareBehavior));
         }
     }
 }
