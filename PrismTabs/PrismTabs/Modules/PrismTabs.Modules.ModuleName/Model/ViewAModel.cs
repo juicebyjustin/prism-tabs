@@ -10,6 +10,9 @@ namespace PrismTabs.Modules.ModuleName.Model
     [AddINotifyPropertyChangedInterface]
     public class ViewAModel
     {
+        /// <summary>
+        /// The + are added in ViewBViewModel.OnNavigatedTo
+        /// </summary>
         public string Data { get; set; }
     }
 }

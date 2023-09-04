@@ -32,6 +32,8 @@ namespace PrismTabs.Modules.ModuleName.ViewModels
             if (model != null)
             {
                 Model = model;
+
+                Model.Data = Model.Data + "+";
             }
 
             //do something
