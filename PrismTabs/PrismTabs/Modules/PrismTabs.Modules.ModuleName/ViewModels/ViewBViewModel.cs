@@ -11,13 +11,20 @@ namespace PrismTabs.Modules.ModuleName.ViewModels
     /// <see cref="IRegionManagerAware"/> must be on every view model
     /// </summary>
     [AddINotifyPropertyChangedInterface]
-    public class ViewBViewModel : RegionAwareViewModelBase
+    public class ViewBViewModel : ViewModelBase, IRegionManagerAware
     {
         private readonly IRegionManager _regionManager;
 
         public ViewAModel Model { get; set; }
 
+        public IRegionManager RegionManager
+        {
+            get => regionManager;
+            set => regionManager = value;
+        }
+
         private string _message;
+        private IRegionManager regionManager;
         public string Message
         {
             get { return _message; }

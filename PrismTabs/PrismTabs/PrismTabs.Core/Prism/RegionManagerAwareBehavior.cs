@@ -13,7 +13,6 @@ namespace PrismTabs.Core.Prism
     /// <summary>
     /// Code is pulled from PluralSight course download Mastering TabControl.
     /// 
-    /// 
     /// When a view is injected into a region the view goes into the Region Adapter first. The region adapter adapts the view to the region. 
     /// Such as a TabItem is created to create a new tab item and add the view to the tab item for display in the tab control region.
     /// 
@@ -29,7 +28,13 @@ namespace PrismTabs.Core.Prism
         }
 
         /// <summary>
-        /// Associate the scoped RegionManager to the injected View
+        /// Associate the scoped RegionManager to the injected View.
+        /// 
+        /// If ViewA has the scoped region that contains a region called "ChildRegion" then views can be navigated into the ChildRegion.
+        /// When the navigation occurs, the RegionManager that is being used is the context of this function call. 
+        /// 
+        /// So essentially, ViewA's RegionManager is calling Views_CollectionChanged because that Regions' Views Collection 
+        /// is changing due to the navigation.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e">Contains new Views to be added to the region.</param>
