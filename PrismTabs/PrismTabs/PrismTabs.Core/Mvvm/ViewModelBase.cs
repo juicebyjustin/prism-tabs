@@ -36,7 +36,7 @@ namespace PrismTabs.Core.Mvvm
 
         }
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
 
         }

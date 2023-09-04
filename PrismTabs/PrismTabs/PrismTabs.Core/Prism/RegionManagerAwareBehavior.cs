@@ -11,7 +11,7 @@ using System.Windows;
 namespace PrismTabs.Core.Prism
 {
     /// <summary>
-    /// Code is pulled from PluralSight course download.
+    /// Code is pulled from PluralSight course download Mastering TabControl.
     /// 
     /// 
     /// When a view is injected into a region the view goes into the Region Adapter first. The region adapter adapts the view to the region. 
@@ -29,30 +29,38 @@ namespace PrismTabs.Core.Prism
         }
 
         /// <summary>
-        /// 
+        /// Associate the scoped RegionManager to the injected View
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="e">Contains new Views to be added to the region.</param>
         void Views_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
+                // iterate through each new View in the Region
                 foreach (var item in e.NewItems)
                 {
+                    // start with the current regions RegionManager
                     IRegionManager regionManager = Region.RegionManager;
 
-                    // If the view was created with a scoped region manager, the behavior uses that region manager instead.
+                    // Find the scoped RegionManager
+                    // If the view was created with a scoped region manager, which in our case it is. 
+                    // we need to write this code. if leave this code out it won't work as expected.
                     FrameworkElement element = item as FrameworkElement;
                     if (element != null)
                     {
-                        // view b returns the region manager that is used in view A.
-                        // TODO: watch multiple shells video to get details on this functionality.
+                        var interfaces = element.GetType().GetInterfaces();
+
+                        // view b returns the region manager that is used in view A....because ViewB is a child of ViewA?
+                        // i don't understand how Viewb returns not null here because it has no visible RegionManagerProperty
                         IRegionManager scopedRegionManager = element.GetValue(RegionManager.RegionManagerProperty) as IRegionManager;
                         if (scopedRegionManager != null)
                         {
                             regionManager = scopedRegionManager;
                         }
                     }
+
+                    //var t = element.GetValue(RegionManager.RegionManagerProperty);
 
                     InvokeOnRegionManagerAwareElement(item, x => x.RegionManager = regionManager);
                 }
@@ -66,17 +74,25 @@ namespace PrismTabs.Core.Prism
             }
         }
 
+        /// <summary>
+        /// Passing in the value we want to set.
+        /// </summary>
+        /// <param name="item">The value we want to set.</param>
+        /// <param name="invocation"></param>
         private static void InvokeOnRegionManagerAwareElement(object item, Action<IRegionManagerAware> invocation)
         {
+            // if view model
             var regionManagerAwareItem = item as IRegionManagerAware;
             if (regionManagerAwareItem != null)
             {
                 invocation(regionManagerAwareItem);
             }
 
+            // if view
             FrameworkElement frameworkElement = item as FrameworkElement;
             if (frameworkElement != null)
             {
+                // get the view model
                 IRegionManagerAware regionManagerAwareDataContext = frameworkElement.DataContext as IRegionManagerAware;
                 if (regionManagerAwareDataContext != null)
                 {

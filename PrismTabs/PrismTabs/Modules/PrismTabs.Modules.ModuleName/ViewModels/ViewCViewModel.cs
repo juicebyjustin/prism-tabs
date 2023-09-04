@@ -1,10 +1,11 @@
 ﻿using Prism.Regions;
 using PrismTabs.Core.Mvvm;
+using PrismTabs.Core.Prism;
 using PrismTabs.Services.Interfaces;
 
 namespace PrismTabs.Modules.ModuleName.ViewModels
 {
-    public class ViewCViewModel : RegionViewModelBase
+    public class ViewCViewModel : RegionAwareViewModelBase
     {
         private string _message;
         public string Message
@@ -13,8 +14,9 @@ namespace PrismTabs.Modules.ModuleName.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
+
         public ViewCViewModel(IRegionManager regionManager, IMessageService messageService) :
-            base(regionManager)
+            base()
         {
             Message = messageService.GetMessage();
 
