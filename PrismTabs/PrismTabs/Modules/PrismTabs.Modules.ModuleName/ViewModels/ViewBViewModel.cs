@@ -1,11 +1,16 @@
 ﻿using Prism.Regions;
 using PrismTabs.Core.Mvvm;
+using PrismTabs.Modules.ModuleName.Model;
 using PrismTabs.Services.Interfaces;
+using PropertyChanged;
 
 namespace PrismTabs.Modules.ModuleName.ViewModels
 {
+    [AddINotifyPropertyChangedInterface]
     public class ViewBViewModel : RegionViewModelBase
     {
+        public ViewAModel Model { get; set; }
+
         private string _message;
         public string Message
         {
@@ -23,6 +28,12 @@ namespace PrismTabs.Modules.ModuleName.ViewModels
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
+            ViewAModel model = navigationContext.NavigationService.Region.Context as ViewAModel;
+            if (model != null)
+            {
+                Model = model;
+            }
+
             //do something
         }
 

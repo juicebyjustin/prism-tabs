@@ -2,12 +2,15 @@
 using Prism.Regions;
 using PrismTabs.Core.Mvvm;
 using PrismTabs.Core.Prism;
+using PrismTabs.Modules.ModuleName.Model;
 using PrismTabs.Services.Interfaces;
+using System;
 
 namespace PrismTabs.Modules.ModuleName.ViewModels
 {
     public class ViewAViewModel : ViewModelBase, IRegionManagerAware
     {
+        public ViewAModel Model { get; set; }
         public IRegionManager RegionManager
         {
             get => regionManager;
@@ -35,6 +38,11 @@ namespace PrismTabs.Modules.ModuleName.ViewModels
 
             Title = "View A";
             NavigateCommand = new DelegateCommand<string>(Navigate);
+
+            Model = new ViewAModel()
+            {
+                Data = DateTime.Now.ToLongTimeString(),
+            };
         }
 
         void Navigate(string navigationPath)

@@ -9,10 +9,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="ViewB"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="24"/>
-            
+        <StackPanel>
+            <TextBlock Text="ViewB"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="24"/>
+
+            <Label Content="{Binding Model.Data}" />
+        </StackPanel>
     </Grid>
 </UserControl>

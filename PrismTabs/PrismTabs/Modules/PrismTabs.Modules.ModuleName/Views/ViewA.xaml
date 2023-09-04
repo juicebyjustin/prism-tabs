@@ -9,11 +9,20 @@
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Text="View A" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" />
-            <Button Grid.Row="1" Command="{Binding NavigateCommand}" CommandParameter="ViewB">Navigate ViewB in Scoped Region</Button>
-            <TabControl Grid.Row="2" prism:RegionManager.RegionName="ChildRegion"/>
+            <TextBlock Text="View A" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28" />
+
+            <Label Content="{Binding Model.Data}"
+                   HorizontalAlignment="Center"
+                   Grid.Row="1"/>
+            
+            <Button Grid.Row="2" Command="{Binding NavigateCommand}" CommandParameter="ViewB">Navigate ViewB in Scoped Region</Button>
+            
+            <TabControl Grid.Row="3"
+                        prism:RegionManager.RegionContext="{Binding Model}"
+                        prism:RegionManager.RegionName="ChildRegion"/>
         </Grid>
     </Grid>
 </UserControl>
